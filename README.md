@@ -16,6 +16,8 @@ page 3: Results (what game they'd like -info for game), info about their answer 
 page 4: Admin (add questions, games, manually assess the long answer questions, add and delete users) 
 optionally: feedback page
 
+Project backlog using Trello: https://trello.com/b/LtrpGwPM/cits3401-project-2
+
 
 
 
