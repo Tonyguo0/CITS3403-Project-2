@@ -28,7 +28,7 @@ python3 -m venv CITS3403-Project-2
 
 then use 
 pip install -r requirements.txt 
-to grab all the required packages for running the program
+to grab all the required packages for running the flask web application in the virtual environment
 
 
 
