@@ -1,4 +1,4 @@
-#!"/mnt/c/Flask project virtual environment/Project 2/CITS3403-Project-2/bin/python3"
+#!"/mnt/c/Flask project virtual environment/Project 2/CITS3403-Project-2/virtual-environment/bin/python3"
 # EASY-INSTALL-ENTRY-SCRIPT: 'alembic==1.4.2','console_scripts','alembic'
 __requires__ = 'alembic==1.4.2'
 import re
