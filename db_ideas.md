@@ -18,11 +18,37 @@ Question
 
 
 Long answers 
-- id = int
+- id = int            //primary key
 - user_id = int       //foreign key to the user who submitted 
 - question_id = int   //foreign key to question
 - answer = varchar    //input from user
 - response = varchar  //the manual assessment 
 - 
+
+
+Feedback 
+- id = int            //primary key
+- 
+
+
+Results 
+- id = int            //primary key
+- user_id = int       //foreign key to user
+- result = int        //value is a foreign key to a game id
+
+
+Genre
+- id = int
+- 
+
+
+Game
+- id = int
+-
+
+
+
+
+
 
 
