@@ -41,8 +41,8 @@ Feedback
 - 
 
 
-#### Results of a quiz for a user.
-Result
+#### A Quiz completed by a user.
+Quiz
 - id = int            //primary key
 - user_id = int       //foreign key to user
 - result = int        //value is a foreign key to a game id
