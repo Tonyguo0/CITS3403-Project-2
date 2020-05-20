@@ -11,9 +11,9 @@ Tables that will be needed:
 User
 - id = int            //primary key
 - username = varchar
-- pw hash = varchar
+- pw_hash = varchar
 - admin = bool
-- results = (not in graph)  //db.relationship('Result', backref='quiz-taker', lazy='dynamic')
+- quizes = (not in graph)  //relationship - db.relationship('Quiz', backref='quiz-taker', lazy='dynamic')
 
 
 #### The question structure.
@@ -21,12 +21,12 @@ Question
 - id = int            //primary key
 - question = varchar
 - options = []        //is list supported in SQLite?
-- genres = not in graph? //db.relationship('Genre', backref='question', lazy='dynamic')
-- attribute = not in graph   //db.relationship('Attribute', backref='question', lazy='dynamic')
+- genres = not in graph? //relationship - db.relationship('Genre', backref='question', lazy='dynamic')
+- attribute = not in graph   //relationship(1-to-1) - db.relationship('Attribute', uselist= False,backref='question')
 
 
 #### Long answers for manual assessment.
-Long answers 
+Long_Answers 
 - id = int            //primary key
 - user_id = int       //foreign key to the user who submitted 
 - question_id = int   //foreign key to question
@@ -38,31 +38,43 @@ Long answers
 #### Feedback given by users, to be viewed by admins.
 Feedback 
 - id = int            //primary key
-- 
+- feedback_msg = varchar
 
 
-#### Results of a quiz for a user.
-Result
+#### A Quiz completed by a user.
+Quiz
 - id = int            //primary key
 - user_id = int       //foreign key to user
-- result = int        //value is a foreign key to a game id
-- Attribute
+- result = int        //value is a foreign key to a game id???
+- Attribute           //relationship
+- Genre               //relationship(1-to-1) - db.relationship('Genre', uselist= False, backref='quiz')
 
 
 #### An attribute of a question or outcome that is used with others to match a user to a game. 
 Attribute
 - id = int            //primary key
-
+- score(for every game) = int [] //again is list supported in SQLite?
+- question_id = int       //foreign key - db.Column(Integer, ForeignKey('question.id'))
 
 #### Genre that games and questions fall under.
 Genre
 - id = int
-- 
+- genre_name = varchar
+- quiz_id = int       //foreign key - db.Column(Integer, ForeignKey('quiz.id'))
 
 #### Game Structure.
 Game
 - id = int
-- attributes = db.relationship('Attribute', backref='game', lazy='dynamic')
+- game_name = varchar
+- attributes         //relationship - db.relationship('Attribute', backref='game', lazy='dynamic')
+
+#### Relationships brain storm
+Genre 1 to 1 Quiz
+Genre 1 to many Games
+Quiz 1 to many questions
+Games(score) many to many Questions
+Attribute 1 to 1 Questions
+
 
 
 
