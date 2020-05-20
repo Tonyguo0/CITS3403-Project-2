@@ -20,16 +20,20 @@ Project backlog using Trello (will be public when released): https://trello.com/
 
 
 # Set Up
-pip freeze > requirements.txt 
-to prepare the packages in flask for a push to github
+To list all packages used in a file use:
+#### pip freeze | grep -v "pkg-resources" > requirements.txt
 
-install virtual environment by doing 
+(removing pkg-resources as it is a known bug with pip freeze caused by ubuntu)
+        - https://stackoverflow.com/a/40167445
 
-python3 -m venv virtual-environment 
+install virtual environment by doing:
+#### python3 -m venv virtual-environment 
 
-then use 
+then enter the virtual environment using:
+#### source virtual-environment/bin/activate
 
-pip install -r requirements.txt 
+and install the requirements:
+#### pip install -r requirements.txt  
 
 to grab all the required packages for running the flask web application in the virtual environment
 
