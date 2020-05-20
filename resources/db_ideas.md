@@ -69,11 +69,11 @@ Game
 - attributes         //relationship - db.relationship('Attribute', backref='game', lazy='dynamic')
 
 #### Relationships brain storm
-Genre 1 to 1 Quiz
-Genre 1 to many Games
-Quiz 1 to many questions
-Games(score) many to many Questions
-Attribute 1 to 1 Questions
+- Genre 1 to 1 Quiz
+- Genre 1 to many Games
+- Quiz 1 to many questions
+- Games(score) many to many Questions
+- Attribute 1 to 1 Questions
 
 
 
