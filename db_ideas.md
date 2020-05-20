@@ -8,6 +8,7 @@ User
 - username = varchar
 - pw hash = varchar
 - admin = bool
+- results = (not in graph)  //db.relationship('Result', backref='quiz-taker', lazy='dynamic')
 
 Question 
 - id = int            //primary key
@@ -31,10 +32,15 @@ Feedback
 - 
 
 
-Results 
+Result
 - id = int            //primary key
 - user_id = int       //foreign key to user
 - result = int        //value is a foreign key to a game id
+- Attribute
+
+
+Attribute
+- id = int            //primary key
 
 
 Genre
