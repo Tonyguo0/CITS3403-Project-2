@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> This is the General page </h1>
+    <h1> lets show some database data </h1>
+    {% for post in posts %}
+    <div><p>user: {{ post.author.username }}</p></div>
+    {% endfor %}
+{% endblock %}

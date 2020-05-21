@@ -6,6 +6,7 @@ from app.models import User
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 
+
 # log out user after every 5 mins of true inactivity
 @app.before_request
 def before_request():
@@ -14,10 +15,10 @@ def before_request():
     # resets the time
     session.modified = True
 
+
 @app.route('/')
-@app.route('/index')
-@login_required
-def index():
+@app.route('/general')
+def general():
     posts = [
         {
             'author': {'username': 'John'},
@@ -32,15 +33,14 @@ def index():
             'body': 'Today was only stressful because I looked at the work! xd'
         }
     ]
-    return render_template('index.html', title='Home', posts=posts)
-    # 
+    return render_template('general.html', title='Home', posts=posts)
 
 
-@app.route('/login', methods= ['GET','POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     # make sure user is not logged in already
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('general'))
     form = LoginForm()
     if form.validate_on_submit():
         # getting the user from the form and filtering
@@ -56,15 +56,16 @@ def login():
         next_page = request.args.get('next')
         # if login URL doesn't have a next argument
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
+            next_page = url_for('general')
         return redirect(next_page)
-    return render_template('login.html',title = 'Sign In', form = form)
+    return render_template('login.html', title='Sign In', form=form)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     # make sure user is not logged in already
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('general'))
     form = RegistrationForm()
     # creates new user with username, email and password provided
     # writes to the database then redirects to login prompt for user to login
@@ -77,9 +78,20 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
+
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('general'))
 
-    
+
+@app.route('/account', methods=['GET', 'POST'])
+@login_required
+def account():
+    return render_template('account.html', title='Account')
+
+
+@app.route('/quiz', methods=['GET', 'POST'])
+@login_required
+def quiz():
+    return render_template('quiz.html', title='Account')

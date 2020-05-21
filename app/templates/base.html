@@ -7,7 +7,9 @@
         {% endif %}
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
         <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
     </head>
 
     <body>
@@ -17,14 +19,14 @@
                 <header class="navbar">
                     <!-- logo -->
                     <div class="logo">
-                        <a href="{{ url_for('index') }}"><h1>GameFinder</h1></a>
+                        <a href="{{ url_for('general') }}"><h1>GameFinder</h1></a>
                     </div>
                     <!--- page links -->
                     <div>
                         <ul class="page-links">
-                            <li><a href="{{ url_for('index') }}">Home</a></li>
-                            <li><a href="{{ url_for('index') }}">Play</a></li>
-                            <li><a href="{{ url_for('index') }}">Account</a></li>
+                            <li><a href="{{ url_for('general') }}">Home</a></li>
+                            <li><a href="{{ url_for('quiz') }}">Play</a></li>
+                            <li><a href="{{ url_for('account') }}">Account</a></li>
                         </ul>
                         <!-- add if current_user.user is admin etc show admin button -->
                     </div>
