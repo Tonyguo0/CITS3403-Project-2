@@ -15,6 +15,15 @@ User
 - admin = bool
 - quizes = (not in graph)  //relationship - db.relationship('Quiz', backref='quiz-taker', lazy='dynamic')
 
+#### Long answers for manual assessment.
+Long_Answers 
+- id = int            //primary key
+- user_id = int       //foreign key to the user who submitted 
+- question_id = int   //foreign key to question
+- answer = varchar    //input from user
+- response = varchar  //the manual assessment 
+
+
 #### Feedback given by users, to be viewed by admins.
 Feedback 
 - id = int            //primary key
@@ -25,7 +34,6 @@ Feedback
 Quiz
 - id = int            //primary key
 - questions           //relationship(1-to-many) - db.relationship('Questions', backref='quiz', lazy='dynamic')
-- game_counter = int  //counter used for each game
 - user_id = int       //foreign key to user
 - result = int        //foreign key - db.Column(Integer, ForeignKey('game.id'))
 - genre               //relationship(1-to-1) - db.relationship('Genre', uselist= False, backref='quiz')
