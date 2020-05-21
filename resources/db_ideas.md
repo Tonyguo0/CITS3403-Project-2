@@ -12,8 +12,22 @@ User
 - id = int            //primary key
 - username = varchar
 - pw_hash = varchar
-- admin = bool
+- roles               //relationship(1-to-1) - db.relationship('Role', secondary = 'user_roles')
 - quizes = (not in graph)  //relationship - db.relationship('Quiz', backref='quiz-taker', lazy='dynamic')
+
+#### Define the Role Structure
+Role
+- _tablename_ = 'role'
+- id = int              //primary key
+- name = varchar        //name of the role
+
+#### Define the UserRoles association table
+UserRoles
+- _tablename_ = 'user_roles'
+- id = int
+- user_id              //foreign key
+- role_id              //foreign key
+
 
 #### Feedback given by users, to be viewed by admins.
 Feedback 
