@@ -32,16 +32,19 @@ class User(UserMixin, db.Model):
 
 # Define the Role data-model
 class Role(db.Model):
-    __tablename__ = 'role'
+    __tablename__ = 'roles'
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(50), unique=True)
+
+    def __repr__(self):
+        return '<{}>'.format(self.name)
 
 # Define the UserRoles association table
 class UserRoles(db.Model):
     __tablename__ = 'user_roles'
     id = db.Column(db.Integer(), primary_key=True)
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
-    role_id = db.Column(db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))
+    role_id = db.Column(db.Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))
 
 
 class Post(db.Model):
