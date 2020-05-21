@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+body {
+    background-color: rgb(186, 187, 180);
+    margin: 0px;
+}
+
+/* navigation bar styling */
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #24252A !important;
+    padding: 20px 5%;
+}
+
+.navbar a, button {
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+.logo {
+    font-family: "Raleway", sans-serif;
+    color: #edf0f1;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.page-links {
+    list-style: none;
+}
+
+.page-links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.page-links li a {
+    transition: all 0.3s ease 0s;
+}
+
+.page-links li a:hover {
+    color: #0088a9;
+}
+
+.login-button button {
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    margin-left: 20px;
+}
+
+.login-button button:hover {
+    background-color: rgba(0,136,169,0.7);
+}
+
+
