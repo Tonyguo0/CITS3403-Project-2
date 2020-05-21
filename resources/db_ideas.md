@@ -15,16 +15,6 @@ User
 - admin = bool
 - quizes = (not in graph)  //relationship - db.relationship('Quiz', backref='quiz-taker', lazy='dynamic')
 
-
-#### The question structure.
-Question 
-- id = int            //primary key
-- question = varchar
-- options = []        //is list supported in SQLite?
-- genres = not in graph? //relationship - db.relationship('Genre', backref='question', lazy='dynamic')
-- attribute = not in graph   //relationship(1-to-1) - db.relationship('Attribute', uselist= False,backref='question')
-
-
 #### Long answers for manual assessment.
 Long_Answers 
 - id = int            //primary key
@@ -44,17 +34,31 @@ Feedback
 #### A Quiz completed by a user.
 Quiz
 - id = int            //primary key
+- questions           //relationship(1-to-many) - db.relationship('Questions', backref='quiz', lazy='dynamic')
 - user_id = int       //foreign key to user
-- result = int        //value is a foreign key to a game id???
-- Attribute           //relationship
-- Genre               //relationship(1-to-1) - db.relationship('Genre', uselist= False, backref='quiz')
+- result = int        //foreign key - db.Column(Integer, ForeignKey('game.id'))
+- genre               //relationship(1-to-1) - db.relationship('Genre', uselist= False, backref='quiz')
 
+#### The question structure.
+Question 
+- id = int            //primary key
+- question_body = varchar      //the body of the question 
+- options             //relationship(1-to-many) - db.relationship('Options', backref='question', lazy='dynamic')
+- quiz_id             //foreign key - db.Column(Integer, ForeignKey('quiz.id'))
+
+#### the options for the question structure
+Option
+- id = int            //primary key
+- option_body = varchar    //one body of the option
+- question_id         //foreign key - db.Column(Integer, ForeignKey('question.id'))
+- attribute           //relationship(1-to-many) - db.relationship('Attribute', backref='options', lazy='dynamic')
 
 #### An attribute of a question or outcome that is used with others to match a user to a game. 
 Attribute
 - id = int            //primary key
-- score(for every game) = int [] //again is list supported in SQLite?
-- question_id = int       //foreign key - db.Column(Integer, ForeignKey('question.id'))
+- score_variant = int //score variant based on each option for each game
+- option_id = int     //foreign key - db.Column(Integer, ForeignKey('option.id'))
+- game_id = int       //foreign key - db.Column(Integer, ForeignKey('option.id'))
 
 #### Genre that games and questions fall under.
 Genre
@@ -66,14 +70,28 @@ Genre
 Game
 - id = int
 - game_name = varchar
-- attributes         //relationship - db.relationship('Attribute', backref='game', lazy='dynamic')
+- game_score = int      //for the score of the game
+- Result                //relationship(1 to 1) - db.relationship('Quiz', uselist= False, backref='game')
+- attribute             //relationship(1 to 1) - db.relationship('Attribute', uselist= False, backref='game')
+- scores_id             //foreign key - db.Column(Integer, ForeignKey('scores.id'))
+- genre_id
+
+
 
 #### Relationships brain storm
 - Genre 1 to 1 Quiz
 - Genre 1 to many Games
 - Quiz 1 to many questions
-- Games(score) many to many Questions
+- Games 1 to 1 Quiz
 - Attribute 1 to 1 Questions
+
+#### getting the data from relationships note:
+- To get the data from the corresponding relationships for 1 to many: 
+- parent.query.join(child).filter(child.child_attribute)
+
+#### how to add data corresponding to the foreign key
+- u = User(username='susan', email='susan@example.com')
+- p = Post(body='my first post!', author=u)
 
 
 
