@@ -1,0 +1,29 @@
+Rough User Stories for the Quiz Web Application
+
+
+As a user I would like to view general population information about the quiz.
+  * display 2 infographics, pre-login on main page:
+  * top 5 most popular games
+  * top 5 most popular genres
+
+As a user I would like to be able to login to the web-application.
+  * login form, database, password hashing.
+  
+As a user I would like to be able to complete a quiz multiple times.
+  * quiz page
+  
+As a user I would like to be able to view results from previous quizes, and manually assessed answers.
+  * account page, showing all results as well as any completed long answer responses.
+  
+As a user I would like to be able to give feedback on the site.
+  * feedback option (after quiz or in account page)
+
+As an admin I would like to be able to manually assess long answers.
+  * 
+
+As an admin I would like to add and remove Users.
+  * 
+
+As an admin I would like to add and remove Questions.
+  *
+
