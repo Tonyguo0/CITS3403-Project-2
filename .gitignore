@@ -1,4 +1,4 @@
 virtual-environment/
 /.vscode
-/.idea
-
+.idea/
+.DS_Store
