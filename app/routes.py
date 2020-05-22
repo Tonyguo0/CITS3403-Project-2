@@ -94,8 +94,10 @@ def account():
 @app.route('/quiz', methods=['GET', 'POST'])
 @login_required
 def quiz():
-    flag = bool(Question.query.filter_by(user_id=current_user.id).first())
-    return render_template('quiz.html', title='Quiz', flag = flag)
+    # flag = bool(Question.query.filter_by(user_id=current_user.id).first())
+    questions = Question.query.all()
+    rezero = 0
+    return render_template('quiz.html', title='Quiz',  questions = questions, rezero = rezero)
 
 
 @app.route('/admin', methods=['GET', 'POST'])

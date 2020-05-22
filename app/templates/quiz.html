@@ -3,16 +3,13 @@
 {% block content %}
     <h1> Quiz page </h1>
     <h1>Hi, {{ current_user.username }}! you're logged in :) </h1>
-    {%if flag %}
-     <h2>Question is: {{current_user.quiz[0].questions[0].question_body}}</h2>
+    {% set counter = 0 -%}
+    {%for question in questions%}
+     <h2>Question is: {{question.question_body}}</h2>
     <ul>
-        {# {{option_data = current_user.quiz[0].questions[0].options[0]}}  #}
-        <li>options 1: {{current_user.quiz[0].questions[0].options[0].option_body}} answer : {{current_user.quiz[0].questions[0].options[0].correct}} </li>
-        <li>options 2: {{current_user.quiz[0].questions[0].options[1].option_body}} answer : {{current_user.quiz[0].questions[0].options[1].correct}} </li>
-        <li>options 3: {{current_user.quiz[0].questions[0].options[2].option_body}} answer : {{current_user.quiz[0].questions[0].options[2].correct}} </li>
-        <li>options 4: {{current_user.quiz[0].questions[0].options[3].option_body}} answer : {{current_user.quiz[0].questions[0].options[3].correct}} </li>
+        {%for option in question.options%}
+        <li>options {{counter + loop.index}}: {{option.option_body}} answer : {{option.correct}} </li>
+        {% endfor %}
     </ul>
-    {% else %}
-    <h1>there are no quiz available for this user</h1>
-    {% endif %}
+    {% endfor %}
 {% endblock %}
