@@ -60,7 +60,27 @@ Feedback
 - feedback_msg = varchar
 - user_id             //foreign key
 
+### the querys to add the test data:
+option1 = Option(option_body = 'World of Warcraft')
+option2 = Option(option_body = 'Team Fortress 2')
+option3 = Option(option_body = 'Steam')
+option4 = Option(option_body = 'Dota 2')
+question1 = Question(question_body = 'which one is a moba game?')
+option1.question = question1
+option2.question = question1
+option4.correct = True
+option4.question = question1
+option3.question = question1
+user1 = User.query.get(4)
+quiz1 = Quiz(usersesh = user1)
+db.session.add(quiz1)
+db.session.add(question1)
+db.session.commit()
 
 
 
+can use this to find the child's attributes for 1 to many:
+>>> quiz1.questions[0].questions_body
+### interating through the quizes
+for quizes in Quiz.query.all()
 

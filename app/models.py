@@ -27,15 +27,14 @@ class User(UserMixin, db.Model):
 
 class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    result = db.Column(db.Integer, index=True)
-    questions = db.relationship('Question', backref='quiz', lazy='dynamic')
+    result = db.Column(db.Integer, index=True, default = '0')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
 
 class Question (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question_body = db.Column(db.Text, index=True)
-    options = db.relationship('Options', backref='question', lazy='dynamic')
-    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'))
+    options = db.relationship('Option', backref='question', lazy='dynamic')
 
 class Option (db.Model):
     id = db.Column(db.Integer, primary_key=True)

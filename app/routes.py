@@ -2,7 +2,7 @@ from flask import Flask, session, render_template, flash, redirect, url_for, req
 from app import app, db
 from datetime import timedelta
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Question
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 from flask_user import roles_required
@@ -94,7 +94,8 @@ def account():
 @app.route('/quiz', methods=['GET', 'POST'])
 @login_required
 def quiz():
-    return render_template('quiz.html', title='Quiz')
+    flag = bool(Question.query.filter_by(user_id=current_user.id).first())
+    return render_template('quiz.html', title='Quiz', flag = flag)
 
 
 @app.route('/admin', methods=['GET', 'POST'])
