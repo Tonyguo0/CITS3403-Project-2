@@ -1,37 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Sign In</h1>
-    {#  
-        When the action is set to an empty string the form is submitted
-        to the URL that is currently in the address bar 
 
-        POST request makes for a better user experience because requests of this type 
-        can submit the form data in the body of the request
+    <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
 
-        The novalidate attribute is used to tell the web browser to
-        not apply validation to the fields in this form
-        leaving the task for flask on the server to do 
-    #}
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}
-            {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>{{ form.submit() }}</p>
-    </form>
-    <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+    <div class="login">
+
+        <h1>Sign In</h1>
+
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.username.label }}<br>
+                {{ form.username(size=32, placeholder="username") }}
+                {% for error in form.username.errors %}
+                <span class="error" style="color: rgb(173, 9, 9);">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.password.label }}<br>
+                {{ form.password(size=32, placeholder="password") }}
+                {% for error in form.password.errors %}
+                <span class="error" style="color: rgb(173, 10, 10);">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+
+
+            <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+
+
+            <p>{{ form.submit() }}</p>
+
+
+        </form>
+
+        <a href="{{ url_for('register') }}">
+            <button type="button" class="btn">Register</button>
+        </a>
+
+    </div>
+
+
 {% endblock %}
