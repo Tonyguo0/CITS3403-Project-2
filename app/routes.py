@@ -7,8 +7,6 @@ from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 from flask_user import roles_required
 
-
-
 # log out user after every 5 mins of true inactivity
 @app.before_request
 def before_request():
@@ -99,7 +97,7 @@ def quiz():
     return render_template('quiz.html', title='Quiz')
 
 
-@app.route('/Admin', methods=['GET', 'POST'])
+@app.route('/admin', methods=['GET', 'POST'])
 # @roles_required('Admin')
 @login_required
 def admin():
