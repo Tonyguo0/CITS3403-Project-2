@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> This is the admin page </h1>
+    <h1> only admin can access this page </h1>
+    <h1>Hi, {{ current_user.username }}! , your user role is: {{current_user.roles}}! </h1>
+    <h3>can add/delete users and questions here!!!</h3>
+{% endblock %}

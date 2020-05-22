@@ -5,6 +5,8 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
+from flask_user import roles_required
+
 
 
 # log out user after every 5 mins of true inactivity
@@ -94,4 +96,11 @@ def account():
 @app.route('/quiz', methods=['GET', 'POST'])
 @login_required
 def quiz():
-    return render_template('quiz.html', title='Account')
+    return render_template('quiz.html', title='Quiz')
+
+
+@app.route('/Admin', methods=['GET', 'POST'])
+# @roles_required('Admin')
+@login_required
+def admin():
+    return render_template('admin.html', title='Admin')
