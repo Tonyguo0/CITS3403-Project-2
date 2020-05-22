@@ -3,15 +3,11 @@ from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-#  Flask-Login retrieves the ID of the user from the session, and then loads that user into memory
-# Flask-Login knows nothing about databases, it needs the application's help in loading a user.
 
-# The id that Flask-Login passes to the function as an argument is going 
-# to be a string, so databases that use numeric IDs need to convert the 
-# string to integer as you see above.
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -19,32 +15,14 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     post = db.relationship('Post', backref='author', lazy='dynamic')
-    roles = db.relationship('Role', secondary='user_roles')
 
     def __repr__(self):
-        return '<User {}> and '.format(self.username) + '<Email {}>'.format(self.email) 
+        return '<User {}> and '.format(self.username) + '<Email {}>'.format(self.email)
     # generate a hash for the password to be encoded 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-
-
-# Define the Role data-model
-class Role(db.Model):
-    __tablename__ = 'roles'
-    id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(50), unique=True)
-
-    def __repr__(self):
-        return '<{}>'.format(self.name)
-
-# Define the UserRoles association table
-class UserRoles(db.Model):
-    __tablename__ = 'user_roles'
-    id = db.Column(db.Integer(), primary_key=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
-    role_id = db.Column(db.Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))
 
 
 class Post(db.Model):
