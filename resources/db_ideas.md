@@ -11,38 +11,16 @@ Tables that will be needed:
 User
 - id = int            //primary key
 - username = varchar
-- pw_hash = varchar
-- roles               //relationship(1-to-1) - db.relationship('Role', secondary = 'user_roles')
-- quizes = (not in graph)  //relationship - db.relationship('Quiz', backref='quiz-taker', lazy='dynamic')
-
-#### Define the Role Structure
-Role
-- _tablename_ = 'role'
-- id = int              //primary key
-- name = varchar        //name of the role
-
-#### Define the UserRoles association table
-UserRoles
-- _tablename_ = 'user_roles'
-- id = int
-- user_id              //foreign key
-- role_id              //foreign key
-
-
-#### Feedback given by users, to be viewed by admins.
-Feedback 
-- id = int            //primary key
-- feedback_msg = varchar
-
+- password_hash = varchar
+- quizes = (not in graph)  //relationship - db.relationship('Quiz', backref='users', lazy='dynamic')
+- feedback            //relationship(1-to-many) - db.relationship('Feedback', backref='users', lazy='dynamic')
 
 #### A Quiz completed by a user.
 Quiz
 - id = int            //primary key
+- result = int        //for holding the result of the whole quiz
 - questions           //relationship(1-to-many) - db.relationship('Questions', backref='quiz', lazy='dynamic')
-- game_counter = int  //counter used for each game
 - user_id = int       //foreign key to user
-- result = int        //foreign key - db.Column(Integer, ForeignKey('game.id'))
-- genre               //relationship(1-to-1) - db.relationship('Genre', uselist= False, backref='quiz')
 
 #### The question structure.
 Question 
@@ -55,39 +33,14 @@ Question
 Option
 - id = int            //primary key
 - option_body = varchar    //one body of the option
+- correct = bool      //if the option is correct
 - question_id         //foreign key - db.Column(Integer, ForeignKey('question.id'))
-- attribute           //relationship(1-to-many) - db.relationship('Attribute', backref='options', lazy='dynamic')
-
-#### An attribute of a question or outcome that is used with others to match a user to a game. 
-Attribute
-- id = int            //primary key
-- score_variant = int //score variant based on each option for each game
-- option_id = int     //foreign key - db.Column(Integer, ForeignKey('option.id'))
-- game_id = int       //foreign key - db.Column(Integer, ForeignKey('option.id'))
-
-#### Genre that games and questions fall under.
-Genre
-- id = int
-- genre_name = varchar
-- quiz_id = int       //foreign key - db.Column(Integer, ForeignKey('quiz.id'))
-
-#### Game Structure.
-Game
-- id = int
-- game_name = varchar
-- game_score = int      //for the score of the game
-- Result                //relationship(1 to 1) - db.relationship('Quiz', uselist= False, backref='game')
-- attribute             //relationship(1 to 1) - db.relationship('Attribute', uselist= False, backref='game')
-- scores_id             //foreign key - db.Column(Integer, ForeignKey('scores.id'))
-- genre_id
 
 
 
 #### Relationships brain storm
 - Genre 1 to 1 Quiz
-- Genre 1 to many Games
 - Quiz 1 to many questions
-- Games 1 to 1 Quiz
 - Attribute 1 to 1 Questions
 
 #### getting the data from relationships note:
@@ -100,6 +53,12 @@ Game
 
 
 
+
+#### Feedback given by users, to be viewed by admins.
+Feedback 
+- id = int            //primary key
+- feedback_msg = varchar
+- user_id             //foreign key
 
 
 
