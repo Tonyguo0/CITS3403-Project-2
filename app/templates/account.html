@@ -4,5 +4,13 @@
     <h1> Account page </h1>
     <h1>Hi, {{ current_user.username }}!</h1>
 
-    <h3>here we can show the player's results etc.</h3>
+    {%if result%}
+    <h3>the player's result: </br>
+        You got a score of {{result}} out of {{count}} ({{percentage}}%)
+    </h3>
+    {% else %}
+    <h3>the player's result: </br>
+        you have not done the quiz yet!
+    </h3>
+    {% endif %}
 {% endblock %}

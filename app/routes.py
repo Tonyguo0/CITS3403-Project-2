@@ -2,7 +2,7 @@ from flask import Flask, session, render_template, flash, redirect, url_for, req
 from app import app, db
 from datetime import timedelta
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Question, Option
+from app.models import User, Question, Option, Quiz
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 from flask_user import roles_required
@@ -88,7 +88,15 @@ def logout():
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
-    return render_template('account.html', title='Account')
+    current_result = ""
+    question_count = ""
+    percentage = ""
+    if bool(Quiz.query.filter_by(user_id = current_user.id).first()):
+        question_count = Question.query.count()
+        current_result = current_user.quiz[0].result
+        percentage = (current_result/question_count) *100
+        
+    return render_template('account.html', title='Account', result = current_result, count = question_count, percentage = percentage)
 
 
 @app.route('/quiz', methods=['GET', 'POST'])
@@ -106,18 +114,13 @@ def quiz():
             request_name = request.form[strqid]
             if Option.query.filter_by( option_body = request_name).first().correct:
                 result += 1
+        if not bool(Quiz.query.filter_by(user_id = current_user.id).first()):
+            quiz = Quiz(usersesh = current_user)
+            db.session.add(quiz)
+            db.session.commit()
         current_user.quiz[0].result = result
         db.session.commit()    
-        return redirect(url_for('quizresult'))
-            # print()
-    # options = Option.query.all()
-    # option
-    # form = Quizform()
-    # form.radio.choices = [(option.option_body,option.option_body) for option in options]
-    # for question in questions:
-    #     form.radio.input = question
-    # return questions
-    print(questions)
+        return redirect(url_for('account'))
     return render_template('quiz.html', title='Quiz',  questions = questions)
 
 @app.route('/quizresult', methods=['GET', 'POST'])
