@@ -101,7 +101,7 @@ def quiz():
 
 
 @app.route('/admin', methods=['GET', 'POST'])
-# @roles_required('Admin')
 @login_required
 def admin():
-    return render_template('admin.html', title='Admin')
+    return render_template('admin/index.html', title='Admin')
+
