@@ -2,7 +2,7 @@ from flask import Flask, session, render_template, flash, redirect, url_for, req
 from app import app, db
 from datetime import timedelta
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Question
+from app.models import User, Question, Option
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 from flask_user import roles_required
@@ -96,9 +96,38 @@ def account():
 def quiz():
     # flag = bool(Question.query.filter_by(user_id=current_user.id).first())
     questions = Question.query.all()
-    rezero = 0
-    return render_template('quiz.html', title='Quiz',  questions = questions, rezero = rezero)
+    result = 0 
+    # options = Option.query.all()
+    # for question in questions:
 
+    if request.method == "POST":
+        for question in questions:
+            strqid = str(question.id)
+            request_name = request.form[strqid]
+            if Option.query.filter_by( option_body = request_name).first().correct:
+                result += 1
+        current_user.quiz[0].result = result
+        db.session.commit()    
+        return redirect(url_for('quizresult'))
+            # print()
+    # options = Option.query.all()
+    # option
+    # form = Quizform()
+    # form.radio.choices = [(option.option_body,option.option_body) for option in options]
+    # for question in questions:
+    #     form.radio.input = question
+    # return questions
+    print(questions)
+    return render_template('quiz.html', title='Quiz',  questions = questions)
+
+@app.route('/quizresult', methods=['GET', 'POST'])
+@login_required
+def quizresult():
+    question_count = Question.query.count()
+    current_result = current_user.quiz[0].result
+    percentage = (current_result/question_count) *100
+    
+    return render_template('quiz result.html', title='Result', result = current_result, count = question_count, percentage = percentage)
 
 @app.route('/admin', methods=['GET', 'POST'])
 @login_required

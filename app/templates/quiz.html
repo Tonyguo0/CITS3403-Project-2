@@ -1,15 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <script>
+        
+    </script>
     <h1> Quiz page </h1>
     <h1>Hi, {{ current_user.username }}! you're logged in :) </h1>
     {% set counter = 0 -%}
+    <form action="", method="post">
     {%for question in questions%}
      <h2>Question is: {{question.question_body}}</h2>
-    <ul>
+        
+       {# {{ form.radio() }}
+        {% for subfield in form.radio %}
+        <ol type = "A">
+            <li>{{ subfield }} {{ subfield.label }}</li>
+        </ol>
+        {% endfor %}#}
         {%for option in question.options%}
-        <li>options {{counter + loop.index}}: {{option.option_body}} answer : {{option.correct}} </li>
+        
+            <input type="radio" name = "{{question.id}}" id="{{option.id}}" value="{{option.option_body}}">
+            <label for="{{option.id}}"> {{option.option_body}} </label>
+        
+        {# <li>options {{counter + loop.index}}: {{option.option_body}} answer : {{option.correct}} </li> #}
         {% endfor %}
-    </ul>
+        
     {% endfor %}
+    {#<div>{{ form.submit() }}</div>#}
+    </br>
+    </br>
+    <input type="submit" value="submit"> 
+    </form>
 {% endblock %}

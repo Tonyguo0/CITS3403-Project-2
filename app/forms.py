@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField, FieldList, FormField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
@@ -28,3 +28,11 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+# class Quizform(FlaskForm):
+#     radio = RadioField('Label', choices=[])
+#     submit = SubmitField('submit')
+
+# class Addquizforms(FlaskForm):
+#     radio_forms = FieldList(FormField(Quizform))
+    
