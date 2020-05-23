@@ -12,8 +12,23 @@ User
 - id = int            //primary key
 - username = varchar
 - pw_hash = varchar
-- admin = bool
+<!-- - admin = bool -->
+- roles               //relationship(1-to-1) - db.relationship('Role', secondary = 'user_roles')
 - quizes = (not in graph)  //relationship - db.relationship('Quiz', backref='quiz-taker', lazy='dynamic')
+
+<!-- #### Define the Role Structure
+Role
+- _tablename_ = 'role'
+- id = int              //primary key
+- name = varchar        //name of the role
+
+#### Define the UserRoles association table
+UserRoles
+- _tablename_ = 'user_roles'
+- id = int
+- user_id              //foreign key
+- role_id              //foreign key -->
+
 
 #### Long answers for manual assessment.
 Long_Answers 
@@ -94,6 +109,33 @@ Game
 
 
 
+#### A Quiz completed by a user.
+Quiz
+- id = int            //primary key
+- Genre = varchar     //genre of the quiz
+- result = int        //for holding the result of the whole quiz
+- questions           //relationship(1-to-many) - db.relationship('Questions', backref='quiz', lazy='dynamic')
+- user_id = int       //foreign key to user
+
+#### The question structure.
+Question 
+- id = int            //primary key
+- question_body = varchar      //the body of the question 
+- options             //relationship(1-to-many) - db.relationship('Options', backref='question', lazy='dynamic')
+- answer              //relationship(1-to-1) - db.relationship('Answer', uselist= False, backref='option') 
+- quiz_id             //foreign key - db.Column(Integer, ForeignKey('quiz.id'))
+
+#### the options for the question structure
+Option
+- id = int            //primary key
+- option_body = varchar    //one body of the option
+- answer              //relationship(1-to-1) - db.relationship('Answer', uselist= False, backref='option') 
+- question_id         //foreign key - db.Column(Integer, ForeignKey('question.id'))
+
+#### the answer option for the question
+Answer
+- Question_id = int   //Foriegn key
+- Option_id = int     //Foreign key
 
 
 
