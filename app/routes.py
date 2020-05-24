@@ -123,6 +123,7 @@ def quiz():
         return redirect(url_for('account'))
     return render_template('quiz.html', title='Quiz',  questions = questions)
 
+
 @app.route('/quizresult', methods=['GET', 'POST'])
 @login_required
 def quizresult():
@@ -131,6 +132,7 @@ def quizresult():
     percentage = (current_result/question_count) *100
     
     return render_template('quiz result.html', title='Result', result = current_result, count = question_count, percentage = percentage)
+
 
 @app.route('/admin', methods=['GET', 'POST'])
 @login_required

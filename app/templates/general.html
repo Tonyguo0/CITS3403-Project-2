@@ -1,9 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1> This is the General page </h1>
-    <h1> lets show some database data </h1>
-    {% for post in posts %}
-    <div><p>user: {{ post.author.username }}</p></div>
-    {% endfor %}
+
+    <link href="{{ url_for('static', filename='css/general.css') }}" rel="stylesheet">
+
+    <!-- clock at top of page -->
+    <div class="time-div">
+         <time id="my-clock"></time>
+    </div>
+    <!-- bar at the top of body-->
+    <div class="page-bar"></div>
+    <!-- body content -->
+    <div class="page-div">
+
+        <h1> This is the General page </h1>
+
+        <div class="general-info">
+            <!-- show a visualisation of results? -->
+            {% for post in posts %}
+            <div><p>user: {{ post.author.username }}</p></div>
+            {% endfor %}
+
+        </div>
+
+
+
+
+    </div>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/general.js') }}"></script>
 {% endblock %}

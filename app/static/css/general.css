@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+/* decorative piece above the content part of general page */
+.page-bar {
+    margin: auto;
+    margin-top: 50px;
+    width: 80%;
+    height: 70px;
+    background-color: rgb(53, 57, 63);
+    border: solid 2px;
+    border-radius: 2px;
+    border-color: rgb(44, 44, 44);
+    padding-left: auto;
+}
+
+/* container holding main page content */
+.page-div {
+    height: 60%;
+    width: 75%;
+    margin: auto;
+    font-family: 'Raleway', sans-serif;
+    background-color: rgb(223, 225, 231);
+    padding: 20px;
+    border: solid 2px;
+    border-color: rgb(51, 50, 50);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+/* the clock styling */
+.time-div {
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-top: 20px;
+    width: auto;
+    height: auto;
+    background-color: rgb(41, 42, 43);
+    border: solid 2px;
+    border-radius: 5px;
+    border-color: rgb(43, 43, 43);
+    box-shadow: grey;
+    box-sizing: border-box;
+}
+
+#my-clock {
+  font-family: "Raleway" , Helvetica, sans-serif;
+  font-weight: 100;
+  color: #edf0f1;;
+  display: block;
+  text-align: center;
+  font-size: 74;
+  padding: 10px;
+  letter-spacing: 2px;
+}
+
+#my-clock span {
+  display: inline-block;
+  font-family: "Raleway" , Helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 48;
+  position: relative;
+}
+
+
+
+
