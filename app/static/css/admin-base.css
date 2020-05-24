@@ -1,11 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
+
+.navbar {
+    margin-bottom: 0px !important;
+}
+
+.background-container {
+    padding-top: 30px;
+    background-color: rgb(238, 240, 248) !important;
+    height: 90%;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border: 2px solid;
+    border-top: 0px solid;
+}
+/* admin view element overrides */
+ul, .table-responsive {
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+/* some html elements in admin/master.html prefaced with 'my-' to override bootstrap styling */
+
+.my-html {
+    height:100%;
+}
+
 .my-body {
     margin: 0px;
 	width: 100%;
 	height:100%;
 	font-family: 'Raleway', sans-serif;
 	padding-top: 0px;
+
+
+	background: #092756;
+	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(93, 119, 131, 0.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(111, 142, 155, 0.4) 10%,rgba(136, 114, 79, 0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(94, 120, 131, 0.4) 10%,rgba(129, 109, 76, 0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+	background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(83, 106, 116, 0.4) 10%,rgba(139, 117, 80, 0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(92, 118, 129, 0.4) 10%,rgba(131, 109, 74, 0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
 }
 
 .my-site-wrap {
@@ -64,6 +99,8 @@ hr {
 
 .my-page-links {
     list-style: none;
+    margin-left: 0;
+        margin-right: 0;
 }
 
 .my-page-links .my-li {

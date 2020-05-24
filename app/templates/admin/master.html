@@ -8,7 +8,7 @@ Can now add our original page formatting to this.
 
 
 <!DOCTYPE html>
-<html>
+<html class="my-html">
   <head>
     <title>{% block title %}{% if admin_view.category %}{{ admin_view.category }} - {% endif %}{{ admin_view.name }} - {{ admin_view.admin.name }}{% endblock %}</title>
     {% block head_meta %}
@@ -83,6 +83,7 @@ Can now add our original page formatting to this.
 
 
     <div class="container{%if config.get('FLASK_ADMIN_FLUID_LAYOUT', False) %}-fluid{% endif %}">
+
       <nav class="navbar navbar-default" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -115,14 +116,17 @@ Can now add our original page formatting to this.
         </div>
       </nav>
 
-      {% block messages %}
-      {{ layout.messages() }}
-      {% endblock %}
+      <div class="background-container">
+          {% block messages %}
+          {{ layout.messages() }}
+          {% endblock %}
 
-      {# store the jinja2 context for form_rules rendering logic #}
-      {% set render_ctx = h.resolve_ctx() %}
+          {# store the jinja2 context for form_rules rendering logic #}
+          {% set render_ctx = h.resolve_ctx() %}
 
-      {% block body %}{% endblock %}
+          {% block body %}{% endblock %}
+      </div>
+
     </div>
     {% endblock %}
 
