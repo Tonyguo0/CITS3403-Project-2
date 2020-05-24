@@ -1,17 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
+    
     <h1> Account page </h1>
     <h1>Hi, {{ current_user.username }}!</h1>
 
     {%if result%}
     <h3>the player's result: </br>
-        You got a score of {{result}} out of {{count}} ({{percentage}}%)
+        You got a score of {{result}} out of {{count}} ({{percentage}}%) for the short answers
     </h3>
     {% else %}
     <h3>the player's result: </br>
         you have not done the quiz yet!
     </h3>
     {% endif %}
+    {% if not quizincompleteflag %}
+        {% if markflag%}
+        <h3>your long answer questions have been reviewed: </br>
+            you got a score of {{mark}} out of {{question_mark}} ({{long_percentage}}%)
+        </h3>
+        {%for answer in long_responses%}
+            {% if answer.response %}
+                <h3> for question:  <mark><b>{{answer.long_question.question_body}}</b></mark> </br>
+                    your response from the admin is: </br>
+                    <mark><b>{{answer.response}}</b></mark>
+                </h3>
+
+            {% endif %}
+        {% endfor %}
+        {%else%}
+            <div id="feedbackform">
+
+            <h3>Your long answer questions are currently under review by the admin <br>
+                please leave a feedback while waiting!:<br> </h3>
+                <form action="", method="post" onsubmit="feedbacksubmit()">
+                    <h2><label for="feedback">please leave the feedback below:</label></h2>
+                    <textarea rows="8" cols="60" name="feedback" id ="feedback" required></textarea>
+                    <input type="submit" value="submit"> 
+                </form>
+            </div>
+           
+            
+        {% endif %}
+    {%else%}
+    {% endif %}
+    <script>
+        let myVar = document.getElementById("feedbackform");
+        function feedbacksubmit(){
+            myVar.innerText = "Your long answer questions are currently under review by the admin Thank you for leaving a feedback!";
+        }
+
+    </script>
 {% endblock %}
 
