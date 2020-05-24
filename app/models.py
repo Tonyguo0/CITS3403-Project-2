@@ -14,7 +14,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    # admin = db.Column(db.Boolean, default = False)
+    admin = db.Column(db.Boolean, default = False)
     quiz = db.relationship('Quiz', backref='usersesh', lazy='dynamic')
     feedback = db.relationship('Feedbacks', backref='feedback_user', lazy='dynamic')
     long_answer = db.relationship('Long_Answers', backref='long_answer_user', lazy='dynamic')
