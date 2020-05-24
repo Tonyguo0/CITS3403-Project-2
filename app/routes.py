@@ -169,6 +169,7 @@ def quiz():
 
     return render_template('quiz.html', title='Quiz', short_questions = short_questions, long_questions = long_questions)
 
+
 @app.route('/quizresult', methods=['GET', 'POST'])
 @login_required
 def quizresult():
@@ -177,6 +178,7 @@ def quizresult():
     percentage = (current_result/question_count) *100
     
     return render_template('quiz result.html', title='Result', result = current_result, count = question_count, percentage = percentage)
+
 
 @app.route('/admin', methods=['GET', 'POST'])
 @login_required
