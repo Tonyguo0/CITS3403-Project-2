@@ -15,7 +15,9 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     quiz = db.relationship('Quiz', backref='usersesh', lazy='dynamic')
-    post = db.relationship('Post', backref='author', lazy='dynamic')
+    feedback = db.relationship('Feedbacks', backref='feedback_user', lazy='dynamic')
+    long_answer = db.relationship('Long_Answers', backref='long_answer_user', lazy='dynamic')
+
 
     def __repr__(self):
         return '<User {}> and '.format(self.username) + '<Email {}>'.format(self.email)
@@ -34,7 +36,10 @@ class Quiz(db.Model):
 class Question (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question_body = db.Column(db.Text, index=True)
+    long_question = db.Column(db.Boolean, default = False)
     options = db.relationship('Option', backref='question', lazy='dynamic')
+    long_answer = db.relationship('Long_Answers', uselist= False, backref='long_question')
+
 
 class Option (db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -42,13 +47,16 @@ class Option (db.Model):
     correct = db.Column(db.Boolean, default = False, nullable=False)
     question_id =db.Column(db.Integer, db.ForeignKey('question.id'))
 
-
-
-class Post(db.Model):
+class Feedbacks (db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    feedback_msg = db.Column(db.Text, index=True)
+    user_id =db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __repr__(self):
-        return '<Post {}>'.format(self.body)
+
+class Long_Answers (db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    answer = db.Column(db.Text, index=True)
+    response = db.Column(db.Text, index=True)
+    mark = db.Column(db.Integer, index = True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
