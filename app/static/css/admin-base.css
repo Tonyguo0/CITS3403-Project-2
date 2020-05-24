@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
-body {
+.my-body {
     margin: 0px;
 	width: 100%;
 	height:100%;
 	font-family: 'Raleway', sans-serif;
+	padding-top: 0px;
 }
 
 .my-site-wrap {
@@ -45,7 +46,7 @@ hr {
     padding: 20px 5%;
 }
 
-.my-navbar a, button {
+.my-navbar .my-a, my-button {
     font-family: "Raleway", sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -65,20 +66,20 @@ hr {
     list-style: none;
 }
 
-.my-page-links li {
+.my-page-links .my-li {
     display: inline-block;
     padding: 0px 20px;
 }
 
-.my-page-links li a {
+.my-page-links .my-li .my-a {
     transition: all 0.3s ease 0s;
 }
 
-.my-page-links li a:hover {
+.my-page-links .my-li .my-a:hover {
     color: #0088a9;
 }
 
-.login-button button {
+.login-button .my-button {
     padding: 9px 25px;
     background-color: rgba(0,136,169,1);
     border: none;
@@ -88,7 +89,7 @@ hr {
     margin-left: 20px;
 }
 
-.login-button button:hover {
+.login-button .my-button:hover {
     background-color: rgba(0,136,169,0.7);
 }
 

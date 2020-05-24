@@ -47,7 +47,7 @@ Can now add our original page formatting to this.
 
 
 
-  <body>
+  <body class="my-body">
     {% block page_body %}
     <!-- Our navigation bar at the top-->
     <div class="my-site-wrap">
@@ -55,24 +55,24 @@ Can now add our original page formatting to this.
             <header class="my-navbar">
                 <!-- logo -->
                 <div class="my-logo">
-                    <a href="{{ url_for('general') }}"><h1 class="my-h1">GameFinder</h1></a>
+                    <a class="my-a" href="{{ url_for('general') }}"><h1 class="my-h1">GameFinder</h1></a>
                 </div>
                 <!--- page links -->
                 <div>
                     <ul class="my-page-links">
-                        <li><a href="{{ url_for('general') }}">Home</a></li>
-                        <li><a href="{{ url_for('quiz') }}">Play</a></li>
-                        <li><a href="{{ url_for('account') }}">Account</a></li>
-                        <li><a href="{{ url_for('admin') }}">Admin</a></li>
+                        <li class="my-li"><a class="my-a" href="{{ url_for('general') }}">Home</a></li>
+                        <li class="my-li"><a class="my-a" href="{{ url_for('quiz') }}">Play</a></li>
+                        <li class="my-li"><a class="my-a" href="{{ url_for('account') }}">Account</a></li>
+                        <li class="my-li"><a class="my-a" href="{{ url_for('admin') }}">Admin</a></li>
                     </ul>
                     <!-- add if current_user.user is admin etc show admin button -->
                 </div>
                 <!-- login/logout button -->
                 <div class="login-button">
                     {% if current_user.is_anonymous %}
-                    <a href="{{ url_for('login') }}"><button>Login</button></a>
+                    <a class="my-a" href="{{ url_for('login') }}"><button class="my-button">Login</button></a>
                     {% else %}
-                    <a href="{{ url_for('logout') }}"><button>Logout</button></a>
+                    <a class="my-a" href="{{ url_for('logout') }}"><button class="my-button">Logout</button></a>
                     {% endif %}
                 </div>
             </header>
@@ -92,10 +92,10 @@ Can now add our original page formatting to this.
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          {% block brand %}
-            <!-- href="{{ admin_view.admin.url }}" -->
+          <!-- {% block brand %}
+             href="{{ admin_view.admin.url }}"
           <a class="navbar-brand" href="{{ url_for('general') }}">{{ admin_view.admin.name }}</a>
-          {% endblock %}
+          {% endblock %} -->
         </div>
         <!-- navbar content -->
         <div class="collapse navbar-collapse" id="admin-navbar-collapse">
