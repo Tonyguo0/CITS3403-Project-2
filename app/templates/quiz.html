@@ -8,25 +8,21 @@
     <h1>Hi, {{ current_user.username }}! you're logged in :) </h1>
     {% set counter = 0 -%}
     <form action="", method="post">
-    {%for question in questions%}
+    {%for question in short_questions%}
      <h2>Question is: {{question.question_body}}</h2>
-        
-       {# {{ form.radio() }}
-        {% for subfield in form.radio %}
-        <ol type = "A">
-            <li>{{ subfield }} {{ subfield.label }}</li>
-        </ol>
-        {% endfor %}#}
         {%for option in question.options%}
         
-            <input type="radio" name = "{{question.id}}" id="{{option.id}}" value="{{option.option_body}}">
+            <input type="radio" name = "{{question.id}}" id="{{option.id}}" value="{{option.option_body}}" required>
             <label for="{{option.id}}"> {{option.option_body}} </label>
-        
-        {# <li>options {{counter + loop.index}}: {{option.option_body}} answer : {{option.correct}} </li> #}
+    
         {% endfor %}
-        
     {% endfor %}
-    {#<div>{{ form.submit() }}</div>#}
+    </br>
+    {%for question in long_questions%}   
+       
+        <h2><label for="{{question.id}}">Question is: {{question.question_body}}</label></h2>
+        <textarea rows="4" cols="50" name="{{question.id}}" id ="{{question.id}}" required></textarea>
+    {% endfor %}
     </br>
     </br>
     <input type="submit" value="submit"> 

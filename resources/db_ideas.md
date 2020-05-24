@@ -36,12 +36,23 @@ Option
 - correct = bool      //if the option is correct
 - question_id         //foreign key - db.Column(Integer, ForeignKey('question.id'))
 
+#### Feedback given by users, to be viewed by admins.
+Feedback 
+- id = int            //primary key
+- feedback_msg = varchar
+- user_id             //foreign key
 
 
-#### Relationships brain storm
-- Genre 1 to 1 Quiz
-- Quiz 1 to many questions
-- Attribute 1 to 1 Questions
+#### Long answers for manual assessment.
+Long_Answers 
+- id = int            //primary key
+- user_id = int       //foreign key to the  user who submitted 
+- question_id = int   //foreign key to question
+- answer = varchar    //input from user
+- response = varchar  //the manual assessment 
+
+
+
 
 #### getting the data from relationships note:
 - To get the data from the corresponding relationships for 1 to many: 
@@ -51,14 +62,6 @@ Option
 - u = User(username='susan', email='susan@example.com')
 - p = Post(body='my first post!', author=u)
 
-
-
-
-#### Feedback given by users, to be viewed by admins.
-Feedback 
-- id = int            //primary key
-- feedback_msg = varchar
-- user_id             //foreign key
 
 ### the querys to add the test data:
 option1 = Option(option_body = 'World of Warcraft')

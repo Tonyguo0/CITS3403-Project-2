@@ -19,12 +19,14 @@ admin = Admin(app, name='GameFinder', template_mode='bootstrap3')
 from app import routes, models
 
 from flask_admin.contrib.sqla import ModelView
-from app.models import User, Post, Question, Option, Quiz
+from app.models import User, Question, Option, Quiz, Feedbacks, Long_Answers
 
 admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(Question, db.session))
 admin.add_view(ModelView(Option, db.session))
 admin.add_view(ModelView(Quiz, db.session))
+admin.add_view(ModelView(Feedbacks, db.session))
+admin.add_view(ModelView(Long_Answers, db.session))
 
 
 
