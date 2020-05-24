@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+body {
+    margin: 0px;
+	width: 100%;
+	height:100%;
+	font-family: 'Raleway', sans-serif;
+}
+
+.my-site-wrap {
+    padding-top: 0px;
+    margin-bottom: 30px;
+}
+
+.my-h1 {
+    font-family: "Raleway";
+    text-decoration: None;
+    color: #edf0f1;
+}
+
+.my-h1:hover {
+    text-decoration: None;
+}
+
+/* get rid of the hr */
+hr {
+    display: block;
+    unicode-bidi: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    overflow: hidden;
+    border-style: none;
+    border-width: 0;
+}
+
+/* navigation bar styling */
+
+.my-navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #24252A;
+    padding: 20px 5%;
+}
+
+.my-navbar a, button {
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+.my-logo {
+    font-family: "Raleway", sans-serif;
+    color: #edf0f1;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.my-page-links {
+    list-style: none;
+}
+
+.my-page-links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.my-page-links li a {
+    transition: all 0.3s ease 0s;
+}
+
+.my-page-links li a:hover {
+    color: #0088a9;
+}
+
+.login-button button {
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    margin-left: 20px;
+}
+
+.login-button button:hover {
+    background-color: rgba(0,136,169,0.7);
+}
+
+
