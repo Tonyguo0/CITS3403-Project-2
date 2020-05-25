@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
+/*  flask-admin imports its own admin html and css, so in order to overwrite them
+ *  with our own, elements have been prefaced with 'my-' in their class.
+ *
+ */
 
 .navbar {
     margin-bottom: 0px !important;
@@ -14,6 +18,7 @@
     border: 2px solid;
     border-top: 0px solid;
 }
+
 /* admin view element overrides */
 ul, .table-responsive {
     margin-left: 3%;
@@ -21,7 +26,6 @@ ul, .table-responsive {
 }
 
 /* some html elements in admin/master.html prefaced with 'my-' to override bootstrap styling */
-
 .my-html {
     height:100%;
 }
@@ -32,7 +36,6 @@ ul, .table-responsive {
 	height:100%;
 	font-family: 'Raleway', sans-serif;
 	padding-top: 0px;
-
 
 	background: #092756;
 	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(93, 119, 131, 0.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
@@ -58,7 +61,7 @@ ul, .table-responsive {
     text-decoration: None;
 }
 
-/* get rid of the hr */
+/* get rid of the hr line from the user-agent stylesheet */
 hr {
     display: block;
     unicode-bidi: none;
@@ -72,7 +75,6 @@ hr {
 }
 
 /* navigation bar styling */
-
 .my-navbar {
     display: flex;
     justify-content: flex-end;

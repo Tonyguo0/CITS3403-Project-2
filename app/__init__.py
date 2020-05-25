@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_admin import Admin
 
-
+# initialise the application as well as our database, login manager and admin
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
@@ -15,12 +15,12 @@ login.login_view = 'login'
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 admin = Admin(app, name='GameFinder', template_mode='bootstrap3')
 
-# __name__
+# import the following after we have initialised our app so we have a cycle
 from app import routes, models
-
 from flask_admin.contrib.sqla import ModelView
 from app.models import User, Question, Option, Quiz, Feedbacks, Long_Answers
 
+# add all of our desired views to the admin panel
 admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(Question, db.session))
 admin.add_view(ModelView(Option, db.session))

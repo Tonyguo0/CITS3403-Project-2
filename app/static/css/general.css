@@ -27,6 +27,10 @@
     border-bottom-right-radius: 2px;
 }
 
+.general-info {
+    text-align: center;
+}
+
 /* the clock styling */
 .time-div {
     margin-left: 8%;
@@ -61,6 +65,23 @@
   position: relative;
 }
 
+.play-now {
+    padding-top: 250px;
+    text-align: center;
+}
 
+.play-now a {
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: solid 3px grey;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    text-decoration: none;
+    font-size: 72px;
+    color: #edf0f1;
+}
 
-
+.play-now a:hover {
+    background-color: rgba(0,136,169,0.7);
+}

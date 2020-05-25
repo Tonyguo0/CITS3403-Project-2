@@ -9,15 +9,15 @@
     <div class="page-bar"></div>
     <!-- body content -->
     <div class="page-div">
-        <h1> Account page </h1>
         <h1>Hi, {{ current_user.username }}!</h1>
 
+        <!-- Display the player's result if it exists -->
         {%if result%}
             <h3>the player's result: </br>
                 You got a score of {{result}} out of {{sum}} possible marks ({{percentage}}%) for the short answers
             </h3>
         {% else %}
-            <h3>the player's result: </br>
+            <h3>Your results: </br>
                 you have not done the quiz yet!
             </h3>
         {% endif %}
@@ -33,8 +33,8 @@
                 {%for answer in long_responses%}
                     <div class="long-response">
                         {% if answer.response %}
-                            <h3> for question:  <mark><b>{{answer.long_question.question_body}}</b></mark> </br>
-                                your response from the admin is: </br>
+                            <h3> <mark><b>{{answer.long_question.question_body}}</b></mark> </br>
+                                Marking comment: </br>
                                 <mark><b>{{answer.response}}</b></mark>
                             </h3>
                         {% endif %}
@@ -42,6 +42,7 @@
                 {% endfor %}
 
             {%else%}
+                <!-- allow feedback to be left at the bottom of the page -->
                 <div id="feedbackform">
                 <h3>Your long answer questions are currently under review by the admin <br>
                     please leave a feedback while waiting!:<br> </h3>

@@ -4,10 +4,9 @@
 
     <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
 
+    <!-- the login form centered in the middle of the page -->
     <div class="login">
-
         <h1>Sign In</h1>
-
         <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
             <p>
@@ -25,12 +24,9 @@
                 {% endfor %}
             </p>
 
-
             <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
 
-
             <p>{{ form.submit() }}</p>
-
 
         </form>
 
