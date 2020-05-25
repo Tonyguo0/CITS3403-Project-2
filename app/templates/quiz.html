@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <script>
-        
-    </script>
-
 
     <link href="{{ url_for('static', filename='css/quiz.css') }}" rel="stylesheet">
 
@@ -15,10 +11,10 @@
 
         <h1> Begin the Quiz! </h1>
 
+        <!-- display all elements of the quiz -->
         {% set counter = 0 -%}
-
         <form action="", method="post">
-
+            <!-- multiple choice questions displayed first -->
             {%for question in short_questions%}
             <div class="question-body">
                 <h2 class="question-h2">{{question.question_body}}</h2>
@@ -30,7 +26,7 @@
                 </div>
             </div>
             {% endfor %}
-
+            <!-- long answer questions displayed at the bottom of the page -->
             {%for question in long_questions%}
                 <div class="question-body">
                     <h2><label for="{{question.id}}">{{question.question_body}}</label></h2>
@@ -46,12 +42,6 @@
                 <input type="submit" value="submit">
             </div>
         </form>
-
-
     </div>
-
-
-
-
 
 {% endblock %}

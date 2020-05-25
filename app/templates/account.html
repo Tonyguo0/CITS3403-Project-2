@@ -11,6 +11,7 @@
     <div class="page-div">
         <h1>Hi, {{ current_user.username }}!</h1>
 
+        <!-- Display the player's result if it exists -->
         {%if result%}
             <h3>the player's result: </br>
                 You got a score of {{result}} out of {{sum}} possible marks ({{percentage}}%) for the short answers
@@ -41,6 +42,7 @@
                 {% endfor %}
 
             {%else%}
+                <!-- allow feedback to be left at the bottom of the page -->
                 <div id="feedbackform">
                 <h3>Your long answer questions are currently under review by the admin <br>
                     please leave a feedback while waiting!:<br> </h3>

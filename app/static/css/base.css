@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
+/* the base css file to accompany base.html, used across all pages in the
+ * web-application to maintain consistent user experience and increase
+ * maintainability.
+ */
+
 html {
     height: 100%;
 }
@@ -38,7 +43,6 @@ hr {
 }
 
 /* navigation bar styling */
-
 .navbar {
     display: flex;
     justify-content: flex-end;
