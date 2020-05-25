@@ -1,3 +1,5 @@
+# Server side consisting of view functions which processes each page based on GET or Post method
+
 from flask import Flask, session, render_template, flash, redirect, url_for, request
 from app import app, db
 from datetime import timedelta
@@ -28,7 +30,7 @@ def general():
     shortqpercent = 0
     avglong = 0
     numUserlonganswer = 0
-    # 
+    # calculate the user's avg marks for short answer question
     for user in users:
         if not bool(user.quiz.first()):
             continue
@@ -39,7 +41,7 @@ def general():
             if longanswer.mark != None:
                 numUserlonganswer += 1
                 avglong+= longanswer.mark
-
+    # calculate the user's avg marks for long answer question
     longquestions =  Question.query.filter_by(long_question = True)
     numlongq =longquestions.count()
     if numlongq !=0:
@@ -50,12 +52,14 @@ def general():
             longqmark += longquestion.mark_for_question
         
 
-
+    # getting the avg for the long answers
     if numUser!=0:
         avg = round(avg/numUser,2)
         avglong = round(avglong/numUserlonganswer,2)
+    # getting the marks for the short answers
     if db.session.query(func.sum(Question.mark_for_question)).filter_by(long_question = False).scalar() != None:
         shortqmarks = db.session.query(func.sum(Question.mark_for_question)).filter_by(long_question = False).scalar()
+    # getting percentage for both
     if shortqmarks!=0:
         shortqpercent = round((avg/shortqmarks)*100, 2)
     if numlongq !=0:
@@ -112,10 +116,14 @@ def logout():
     logout_user()
     return redirect(url_for('general'))
 
-
+# account page which displays the marks for the short answers the feeback box and the long 
+# answer marks and responses once reviewed by the admin
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
+
+    # if no feedback form has been submitted previously add a feedback table relation
+    # for the currentuser and if it has been submitted previously reset the feedback form
     if request.method == "POST":
         feedbackrequest = request.form["feedback"]
         if not bool(Feedbacks.query.filter_by(user_id = current_user.id).first()):
@@ -125,21 +133,29 @@ def account():
         current_user.feedback.filter_by(user_id = current_user.id).first().feedback_msg = feedbackrequest
         db.session.commit()
 
+    # variables to store the short answer question mark, sum of the total short question marks 
+    # and percentage for the mark
     current_result = ""
     question_sum = ""
     percentage = ""
+    # calculate the above variables below if result can be found for the current user
     if bool(Quiz.query.filter_by(user_id = current_user.id).first()):
         question_sum = db.session.query(func.sum(Question.mark_for_question)).filter_by(long_question = False).scalar()
         current_result = current_user.quiz[0].result
         percentage = int((current_result/question_sum) *100)
     
+
+    # querie to get a list of long answer questions
     long_questions = Question.query.filter_by(long_question = True)
+    # variables for the total mark for the long question gotten, total mark weighting 
+    # for the long questions, percentage for the mark and the response from admin
     quizincompleteflag = False
     markflag = False
     mark = 0
     question_mark = 0
     long_percentage = ""
     long_responses = ""
+     # calculate the above variables below for each long answer question
     for question in long_questions:
         # if no long answer entry can be found for the current user then skip the loop
         if not bool(current_user.long_answer.first()):
@@ -158,21 +174,28 @@ def account():
     return render_template('account.html', title='Account', result = current_result, sum = question_sum, percentage = percentage, mark = mark, markflag = markflag, question_mark = question_mark,long_percentage = long_percentage, quizincompleteflag = quizincompleteflag, long_responses = long_responses)
 
 
+# quiz route for quiz.html the page where users get to play the quiz
 @app.route('/quiz', methods=['GET', 'POST'])
 @login_required
 def quiz():
     
+    # querie to get a list of short answer questions
     short_questions = Question.query.filter_by(long_question = False)
+    # querie to get a list of long answer questions
     long_questions = Question.query.filter_by(long_question = True)
     result = 0 
 
+    # if the quiz form on quiz.html has been submitted
     if request.method == "POST":
+
+        # check if the answer submitted are correct for the short answer questions and generate the result accordingly
         for question in short_questions:
             strqid = str(question.id)
             request_name = request.form[strqid]
             if Option.query.filter_by( option_body = request_name).first().correct:
                 result += 1
 
+        #check if quiz has been done by a user previously if not add a quiz table for the result of the user
         if not bool(Quiz.query.filter_by(user_id = current_user.id).first()):
             quiz = Quiz(usersesh = current_user)
             db.session.add(quiz)
@@ -180,6 +203,7 @@ def quiz():
         current_user.quiz[0].result = result
         db.session.commit()    
 
+        # check if a long answer question has been answered in the past if not then add it, if so reset all responses and marks
         for question in long_questions:
             strqid = str(question.id)
             longAnswer = request.form[strqid]
@@ -196,16 +220,6 @@ def quiz():
         return redirect(url_for('account'))
 
     return render_template('quiz.html', title='Quiz', short_questions = short_questions, long_questions = long_questions)
-
-
-@app.route('/quizresult', methods=['GET', 'POST'])
-@login_required
-def quizresult():
-    question_count = Question.query.count()
-    current_result = current_user.quiz[0].result
-    percentage = (current_result/question_count) *100
-    
-    return render_template('quiz result.html', title='Result', result = current_result, count = question_count, percentage = percentage)
 
 
 @app.route('/admin', methods=['GET', 'POST'])

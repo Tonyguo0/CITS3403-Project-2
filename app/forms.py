@@ -30,11 +30,4 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Please use a different email address.')
 
 
-
-# class Quizform(FlaskForm):
-#     radio = RadioField('Label', choices=[])
-#     submit = SubmitField('submit')
-
-# class Addquizforms(FlaskForm):
-#     radio_forms = FieldList(FormField(Quizform))
     
