@@ -1,0 +1,55 @@
+/* decorative piece above the content part of general page */
+.page-bar {
+    margin: auto;
+    margin-top: 50px;
+    width: 80%;
+    height: 50px;
+    background-color: rgb(53, 57, 63);
+    border: solid 2px;
+    border-radius: 2px;
+    border-color: rgb(44, 44, 44);
+    padding-left: auto;
+}
+
+/* container holding main page content */
+.page-div {
+    margin-bottom: 40px;
+    height: auto;
+    width: 75%;
+    margin: auto;
+    margin-bottom: 80px;
+    font-family: 'Raleway', sans-serif;
+    background-color: rgb(223, 225, 231);
+    padding: 20px;
+    border: solid 4px;
+    border-color: rgb(51, 50, 50);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+
+.question-body {
+    border-bottom: solid 1px grey;
+    margin-bottom: 10px;
+}
+
+.all-options {
+    margin-left: 25px;
+    padding-bottom: 20px;
+}
+
+.submit-btn input {
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    margin-left: 20px;
+    font-family: 'Raleway', sans-serif;
+    color: #edf0f1;
+}
+
+.submit-btn input:hover {
+    background-color: rgba(0,136,169,0.7);
+}
