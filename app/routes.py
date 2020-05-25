@@ -54,16 +54,14 @@ def general():
     if numUser!=0:
         avg = round(avg/numUser,2)
         avglong = round(avglong/numUserlonganswer,2)
-    numshortq = Question.query.filter_by(long_question = False).count()
-    if numshortq!=0:
-        shortqpercent = round((avg/numshortq)*100, 2)
+    if db.session.query(func.sum(Question.mark_for_question)).filter_by(long_question = False).scalar() != None:
+        shortqmarks = db.session.query(func.sum(Question.mark_for_question)).filter_by(long_question = False).scalar()
+    if shortqmarks!=0:
+        shortqpercent = round((avg/shortqmarks)*100, 2)
     if numlongq !=0:
         longqpercent = round((avglong/longqmark)*100,2)
-    print("avg = "+str(avg) + " numUser = "+ str(numUser) +" number of short quizes = "+ str(numshortq)+ " shortqpercent = " + str(shortqpercent)
-     + " avglong = " +str(avglong) + " longqmark = " +str(longqmark) + " longqpercent = " +str(longqpercent) + " number of user that have the long questions marked = " +str(numUserlonganswer)
-    )
         
-    return render_template('general.html', title='Home', avg = avg, numUser = numUser, numshortq = numshortq, shortqpercent = shortqpercent, avglong = avglong, longqmark = longqmark, longqpercent = longqpercent, numUserlonganswer= numUserlonganswer)
+    return render_template('general.html', title='Home', avg = avg, numUser = numUser, shortqmarks = shortqmarks, shortqpercent = shortqpercent, avglong = avglong, longqmark = longqmark, longqpercent = longqpercent, numUserlonganswer= numUserlonganswer)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -128,12 +126,12 @@ def account():
         db.session.commit()
 
     current_result = ""
-    question_count = ""
+    question_sum = ""
     percentage = ""
     if bool(Quiz.query.filter_by(user_id = current_user.id).first()):
-        question_count = Question.query.filter_by(long_question = False).count()
+        question_sum = db.session.query(func.sum(Question.mark_for_question)).filter_by(long_question = False).scalar()
         current_result = current_user.quiz[0].result
-        percentage = int((current_result/question_count) *100)
+        percentage = int((current_result/question_sum) *100)
     
     long_questions = Question.query.filter_by(long_question = True)
     quizincompleteflag = False
@@ -157,7 +155,7 @@ def account():
     # percentage for the long answers
     if question_mark != 0:
         long_percentage = int((mark/question_mark) *100)    
-    return render_template('account.html', title='Account', result = current_result, count = question_count, percentage = percentage, mark = mark, markflag = markflag, question_mark = question_mark,long_percentage = long_percentage, quizincompleteflag = quizincompleteflag, long_responses = long_responses)
+    return render_template('account.html', title='Account', result = current_result, sum = question_sum, percentage = percentage, mark = mark, markflag = markflag, question_mark = question_mark,long_percentage = long_percentage, quizincompleteflag = quizincompleteflag, long_responses = long_responses)
 
 
 @app.route('/quiz', methods=['GET', 'POST'])
