@@ -7,6 +7,7 @@ from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 from flask_user import roles_required
 
+
 # log out user after every 5 mins of true inactivity
 @app.before_request
 def before_request():
@@ -90,22 +91,22 @@ def logout():
 def account():
     if request.method == "POST":
         feedbackrequest = request.form["feedback"]
-        if not bool(Feedbacks.query.filter_by(user_id = current_user.id).first()):
-            feedback = Feedbacks(feedback_user = current_user)
+        if not bool(Feedbacks.query.filter_by(user_id=current_user.id).first()):
+            feedback = Feedbacks(feedback_user=current_user)
             db.session.add(feedback)
             db.session.commit()
-        current_user.feedback.filter_by(user_id = current_user.id).first().feedback_msg = feedbackrequest
+        current_user.feedback.filter_by(user_id=current_user.id).first().feedback_msg = feedbackrequest
         db.session.commit()
 
     current_result = ""
     question_count = ""
     percentage = ""
-    if bool(Quiz.query.filter_by(user_id = current_user.id).first()):
-        question_count = Question.query.filter_by(long_question = False).count()
+    if bool(Quiz.query.filter_by(user_id=current_user.id).first()):
+        question_count = Question.query.filter_by(long_question=False).count()
         current_result = current_user.quiz[0].result
-        percentage = int((current_result/question_count) *100)
-    
-    long_questions = Question.query.filter_by(long_question = True)
+        percentage = int((current_result / question_count) * 100)
+
+    long_questions = Question.query.filter_by(long_question=True)
     quizincompleteflag = False
     markflag = False
     mark = 0
@@ -117,49 +118,51 @@ def account():
         if not bool(current_user.long_answer.first()):
             quizincompleteflag = True
             break
-        if bool(current_user.long_answer.filter_by(question_id = question.id).first().mark != None):
+        if bool(current_user.long_answer.filter_by(question_id=question.id).first().mark != None):
             markflag = True
-            mark += current_user.long_answer.filter_by(question_id = question.id).first().mark
+            mark += current_user.long_answer.filter_by(question_id=question.id).first().mark
             question_mark += question.mark_for_question
     # if there are entries in the long answer for the current user
     if not quizincompleteflag:
-        long_responses = current_user.long_answer    
-    # percentage for the long answers
+        long_responses = current_user.long_answer
+        # percentage for the long answers
     if question_mark != 0:
-        long_percentage = int((mark/question_mark) *100)    
-    return render_template('account.html', title='Account', result = current_result, count = question_count, percentage = percentage, mark = mark, markflag = markflag, question_mark = question_mark,long_percentage = long_percentage, quizincompleteflag = quizincompleteflag, long_responses = long_responses)
+        long_percentage = int((mark / question_mark) * 100)
+    return render_template('account.html', title='Account', result=current_result, count=question_count,
+                           percentage=percentage, mark=mark, markflag=markflag, question_mark=question_mark,
+                           long_percentage=long_percentage, quizincompleteflag=quizincompleteflag,
+                           long_responses=long_responses)
 
 
 @app.route('/quiz', methods=['GET', 'POST'])
 @login_required
 def quiz():
-    
-    short_questions = Question.query.filter_by(long_question = False)
-    long_questions = Question.query.filter_by(long_question = True)
-    result = 0 
+    short_questions = Question.query.filter_by(long_question=False)
+    long_questions = Question.query.filter_by(long_question=True)
+    result = 0
 
     if request.method == "POST":
         for question in short_questions:
             strqid = str(question.id)
             request_name = request.form[strqid]
-            if Option.query.filter_by( option_body = request_name).first().correct:
+            if Option.query.filter_by(option_body=request_name).first().correct:
                 result += 1
 
-        if not bool(Quiz.query.filter_by(user_id = current_user.id).first()):
-            quiz = Quiz(usersesh = current_user)
+        if not bool(Quiz.query.filter_by(user_id=current_user.id).first()):
+            quiz = Quiz(usersesh=current_user)
             db.session.add(quiz)
             db.session.commit()
         current_user.quiz[0].result = result
-        db.session.commit()    
+        db.session.commit()
 
         for question in long_questions:
             strqid = str(question.id)
             longAnswer = request.form[strqid]
-            if not bool(Long_Answers.query.filter_by(user_id = current_user.id, question_id = question.id).first()):
-                long_answer = Long_Answers(long_answer_user = current_user, long_question = question)
+            if not bool(Long_Answers.query.filter_by(user_id=current_user.id, question_id=question.id).first()):
+                long_answer = Long_Answers(long_answer_user=current_user, long_question=question)
                 db.session.add(long_answer)
                 db.session.commit()
-            dbsesh = current_user.long_answer.filter_by(question_id = question.id).first()
+            dbsesh = current_user.long_answer.filter_by(question_id=question.id).first()
             dbsesh.answer = longAnswer
             dbsesh.response = None
             dbsesh.mark = None
@@ -167,7 +170,7 @@ def quiz():
 
         return redirect(url_for('account'))
 
-    return render_template('quiz.html', title='Quiz', short_questions = short_questions, long_questions = long_questions)
+    return render_template('quiz.html', title='Quiz', short_questions=short_questions, long_questions=long_questions)
 
 
 @app.route('/quizresult', methods=['GET', 'POST'])
@@ -175,13 +178,30 @@ def quiz():
 def quizresult():
     question_count = Question.query.count()
     current_result = current_user.quiz[0].result
-    percentage = (current_result/question_count) *100
-    
-    return render_template('quiz result.html', title='Result', result = current_result, count = question_count, percentage = percentage)
+    percentage = (current_result / question_count) * 100
+
+    return render_template('quiz result.html', title='Result', result=current_result, count=question_count,
+                           percentage=percentage)
+
+
+from functools import wraps
+
+def requires_roles(*roles):
+    def wrapper(f):
+        @wraps(f)
+        def wrapped(*args, **kwargs):
+            if current_user.get_role() not in roles:
+                # Redirect the user to an unauthorized notice!
+                return redirect(url_for('unauthorized'))
+            return f(*args, **kwargs)
+
+        return wrapped
+
+    return wrapper
 
 
 @app.route('/admin', methods=['GET', 'POST'])
 @login_required
+@requires_roles('volunteer')
 def admin():
     return render_template('admin/index.html', title='Admin')
-
