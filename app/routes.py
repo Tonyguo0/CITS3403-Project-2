@@ -2,6 +2,7 @@ from flask import Flask, session, render_template, flash, redirect, url_for, req
 from app import app, db
 from datetime import timedelta
 from flask_login import current_user, login_user, logout_user, login_required
+from sqlalchemy import func
 from app.models import User, Question, Option, Quiz, Long_Answers, Feedbacks
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
@@ -18,22 +19,51 @@ def before_request():
 
 @app.route('/')
 @app.route('/general')
+# a welcome page which displays the general statistics of the game 
 def general():
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        },
-        {
-            'author': {'username': 'Tony'},
-            'body': 'Today was only stressful because I looked at the work! xd'
-        }
-    ]
-    return render_template('general.html', title='Home', posts=posts)
+
+    users = User.query.all()
+    avg = 0
+    numUser = 0
+    shortqpercent = 0
+    avglong = 0
+    numUserlonganswer = 0
+    # 
+    for user in users:
+        if not bool(user.quiz.first()):
+            continue
+        else:
+            numUser +=1
+            avg += user.quiz[0].result
+        for longanswer in user.long_answer:
+            if longanswer.mark != None:
+                numUserlonganswer += 1
+                avglong+= longanswer.mark
+
+    longquestions =  Question.query.filter_by(long_question = True)
+    numlongq =longquestions.count()
+    if numlongq !=0:
+        numUserlonganswer /= numlongq
+        numUserlonganswer = int(numUserlonganswer)
+        longqmark = 0
+        for longquestion in longquestions:
+            longqmark += longquestion.mark_for_question
+        
+
+
+    if numUser!=0:
+        avg = round(avg/numUser,2)
+        avglong = round(avglong/numUserlonganswer,2)
+    numshortq = Question.query.filter_by(long_question = False).count()
+    if numshortq!=0:
+        shortqpercent = round((avg/numshortq)*100, 2)
+    if numlongq !=0:
+        longqpercent = round((avglong/longqmark)*100,2)
+    print("avg = "+str(avg) + " numUser = "+ str(numUser) +" number of short quizes = "+ str(numshortq)+ " shortqpercent = " + str(shortqpercent)
+     + " avglong = " +str(avglong) + " longqmark = " +str(longqmark) + " longqpercent = " +str(longqpercent) + " number of user that have the long questions marked = " +str(numUserlonganswer)
+    )
+        
+    return render_template('general.html', title='Home', avg = avg, numUser = numUser, numshortq = numshortq, shortqpercent = shortqpercent, avglong = avglong, longqmark = longqmark, longqpercent = longqpercent, numUserlonganswer= numUserlonganswer)
 
 
 @app.route('/login', methods=['GET', 'POST'])
