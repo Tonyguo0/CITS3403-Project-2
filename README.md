@@ -8,7 +8,7 @@ A simple web application that tests users on gaming trivia.
 ### Page 1.1:
 A login page 
 
-#### Page 1.2: 
+### Page 1.2: 
 An account registeration page
 
 ### Page 2: 
