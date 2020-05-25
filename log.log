@@ -1,34 +1,38 @@
-
-64d1868 was Aiden Lewington, 48 seconds ago, message: Update README.md
-0d1a2af was Aiden Lewington, 69 seconds ago, message: format readme and provide instructions
-159cee2 was aidenlew, 16 minutes ago, message: commenting html and css
-11b7297 was aidenlew, 35 minutes ago, message: pages formatted
-4a7e6c1 was Tony Guo, 2 hours ago, message: Merge pull request #18 from Tg0o0/Db-Models
-0fb9abf was Tony Guo, 2 hours ago, message: changed the logic for short answer questions to reflect the actual mrk instead of the number of questions
-302304c was Tony Guo, 3 hours ago, message: Merge pull request #17 from Tg0o0/Db-Models
+8b5f4a1 was aidenlew, 2 minutes ago, message: accounts added and quiz completed
+377af00 was aidenlew, 16 minutes ago, message: admin page title changed
+917007e was aidenlew, 17 minutes ago, message: added questions to quiz
+d66b7cd was aidenlew, 34 minutes ago, message: comment out init.py
+a038068 was aidenlew, 37 minutes ago, message: git log
+64d1868 was Aiden Lewington, 46 minutes ago, message: Update README.md
+0d1a2af was Aiden Lewington, 46 minutes ago, message: format readme and provide instructions
+159cee2 was aidenlew, 61 minutes ago, message: commenting html and css
+11b7297 was aidenlew, 80 minutes ago, message: pages formatted
+4a7e6c1 was Tony Guo, 3 hours ago, message: Merge pull request #18 from Tg0o0/Db-Models
+0fb9abf was Tony Guo, 3 hours ago, message: changed the logic for short answer questions to reflect the actual mrk instead of the number of questions
+302304c was Tony Guo, 4 hours ago, message: Merge pull request #17 from Tg0o0/Db-Models
 a3a38ae was Tony Guo, 4 hours ago, message: we back
-3d8c7cb was Tony Guo, 4 hours ago, message: Merge branch 'Db-Models' of https://github.com/Tg0o0/CITS3403-Project-2 into Db-Models
-97c9775 was Tony Guo, 4 hours ago, message: Merge pull request #16 from Tg0o0/base-layout
-8b88053 was Tony Guo, 4 hours ago, message: added the statistics to the mainpage of the website
+3d8c7cb was Tony Guo, 5 hours ago, message: Merge branch 'Db-Models' of https://github.com/Tg0o0/CITS3403-Project-2 into Db-Models
+97c9775 was Tony Guo, 5 hours ago, message: Merge pull request #16 from Tg0o0/base-layout
+8b88053 was Tony Guo, 5 hours ago, message: added the statistics to the mainpage of the website
 9c4db24 was aidenlew, 6 hours ago, message: admin wrapper logic
 24555a0 was Tony Guo, 8 hours ago, message: Merge pull request #15 from Tg0o0/master
-cbc7dc6 was aidenlew, 9 hours ago, message: account page formatted
+cbc7dc6 was aidenlew, 10 hours ago, message: account page formatted
 95859ef was aidenlew, 11 hours ago, message: quiz page html
 196fc45 was Tony Guo, 21 hours ago, message: Merge pull request #14 from Tg0o0/master
 ffb3206 was Tony Guo, 21 hours ago, message: Merge pull request #13 from Tg0o0/Db-Models
 513d8ec was Tony Guo, 21 hours ago, message: added role column in User but could't set the admin roles correctly
-686767b was Tony Guo, 21 hours ago, message: Merge pull request #12 from Tg0o0/Db-Models
-07647ff was Tony Guo, 21 hours ago, message: Add files via upload
-e68b0c0 was Tony Guo, 21 hours ago, message: db with feedback and long answers result implemented
-6b770e5 was Tony Guo, 27 hours ago, message: Merge branch 'Db-Models' of https://github.com/Tg0o0/CITS3403-Project-2 into Db-Models
-2f931e7 was Tony Guo, 27 hours ago, message: added feedbacks and long_answer to model.py
-1099192 was aidenlew, 27 hours ago, message: general page clock and format
-cd6a025 was Tony Guo, 28 hours ago, message: Update Game Quiz database Schema with long answers and feedback
-8551fde was Tony Guo, 30 hours ago, message: Merge pull request #11 from Tg0o0/master
-235df60 was aidenlew, 32 hours ago, message: admin page formatted
+686767b was Tony Guo, 22 hours ago, message: Merge pull request #12 from Tg0o0/Db-Models
+07647ff was Tony Guo, 22 hours ago, message: Add files via upload
+e68b0c0 was Tony Guo, 22 hours ago, message: db with feedback and long answers result implemented
+6b770e5 was Tony Guo, 28 hours ago, message: Merge branch 'Db-Models' of https://github.com/Tg0o0/CITS3403-Project-2 into Db-Models
+2f931e7 was Tony Guo, 28 hours ago, message: added feedbacks and long_answer to model.py
+1099192 was aidenlew, 28 hours ago, message: general page clock and format
+cd6a025 was Tony Guo, 29 hours ago, message: Update Game Quiz database Schema with long answers and feedback
+8551fde was Tony Guo, 31 hours ago, message: Merge pull request #11 from Tg0o0/master
+235df60 was aidenlew, 33 hours ago, message: admin page formatted
 1475f5a was aidenlew, 33 hours ago, message: css aligned and navbar fixed
-9a0b8bc was aidenlew, 33 hours ago, message: master.html customisation working
-1a1f57e was aidenlew, 33 hours ago, message: committing to master
+9a0b8bc was aidenlew, 34 hours ago, message: master.html customisation working
+1a1f57e was aidenlew, 34 hours ago, message: committing to master
 3be4e60 was Tony Guo, 2 days ago, message: Merge pull request #10 from Tg0o0/Db-Models
 d078a30 was Tony Guo, 2 days ago, message: result now displays on account page with checker to see if the player has done the quiz or not
 8e8cd87 was Tony Guo, 2 days ago, message: Merge pull request #9 from Tg0o0/Db-Models
@@ -37,7 +41,7 @@ a2efd8e was Tony Guo, 2 days ago, message: implemented quiz with the database, a
 f401929 was Tony Guo, 2 days ago, message: Update Game Quiz database Schema.png
 fe408a0 was Tony Guo, 2 days ago, message: Update Game Quiz database Schema.png
 b0f165a was Tony Guo, 2 days ago, message: Merge pull request #8 from Tg0o0/master
-333c455 was aidenlew, 2 days ago, message: question option views added to admin
+333c455 was aidenlew, 3 days ago, message: question option views added to admin
 ca04cf2 was aidenlew, 3 days ago, message: local changes
 44d6dc7 was aidenlew, 3 days ago, message: local changes
 a017723 was Tony Guo, 3 days ago, message: Merge pull request #7 from Tg0o0/Db-Models
@@ -86,7 +90,7 @@ fd7be2b was aiden lewington, 5 days ago, message: the base-layout branch made
 17823bd was Aiden Lewington, 5 days ago, message: added many-to-many resource
 8518216 was Aiden Lewington, 5 days ago, message: identified more relationships between structures
 e820e66 was Aiden Lewington, 5 days ago, message: Added attribute and other changes
-c3c7ac3 was Aiden Lewington, 5 days ago, message: removing test file
+c3c7ac3 was Aiden Lewington, 6 days ago, message: removing test file
 9b6f028 was Tony Guo, 6 days ago, message: Update README.md
 cfb7a39 was Tony Guo, 6 days ago, message: Merge pull request #2 from Tg0o0/Tutorial-merge-Tony
 62416f4 was Tony Guo, 6 days ago, message: Delete files 2
@@ -100,7 +104,7 @@ c8416cb was Aiden Lewington, 6 days ago, message: Update db_ideas.md
 4f4dfe7 was Aiden Lewington, 6 days ago, message: create db table ideas
 ac595b8 was aiden lewington, 7 days ago, message: testing push to remote repo from local
 2282a06 was Tony Guo, 7 days ago, message: Merge branch 'master' of https://github.com/Tg0o0/CITS3403-Project-2
-1e0071c was Aiden Lewington, 7 days ago, message: Mock wireframes
+1e0071c was Aiden Lewington, 8 days ago, message: Mock wireframes
 b0d53a5 was Tony Guo, 8 days ago, message: pip freeze > requirements.txt no VM  install vm by doing python3 -m venv CITS3403-Project-2  then use pip install -r requirements.txt to grab all the required packages for running the program
 8bb9d43 was Tony Guo, 8 days ago, message: no virtual environment git with pip freeze in the requirement.txt file
 f800a97 was Tg0o0, 8 days ago, message: mega tutorial part 4 halfway
