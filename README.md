@@ -44,3 +44,7 @@ And install the requirements listed in requirements.txt:
 Once all packages are installed, the flask app can be run using:
 #### flask run
 
+Unit tests can be run using the 
+#### python test.py
+
+
