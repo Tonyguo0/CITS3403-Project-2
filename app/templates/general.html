@@ -13,13 +13,18 @@
     <!-- body content -->
     <div class="page-div">
 
-        <h1> This is the General page </h1>
+        <h1> Welcome to the Quiz of Games!</h1>
 
         <div class="general-info">
             <!-- show a visualisation of results? -->
-            {% for post in posts %}
-            <div><p>user: {{ post.author.username }}</p></div>
-            {% endfor %}
+            <h1>please login to access the quiz</h1>
+            <p>from here you can test your knowledge on a range of quiz we have implemented</p>
+            
+
+            <h2>Statistics for the game:
+                <h3>Out of {{numUser}} users that have done the multiple choice quizes, an average of {{avg}} out of a possible {{numshortq}} with a percent of {{shortqpercent}}% was recorded for the short answer section</h3>
+                <h3>Out of {{numUserlonganswer}} users who's longanswer has been marked, an average of {{avglong}} out of a possible {{longqmark}} with a percent of {{longqpercent}}% was recorded for the long answer section</h3>
+            </h2>
 
         </div>
 
