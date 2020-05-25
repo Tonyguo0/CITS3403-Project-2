@@ -11,6 +11,7 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
+login.login_view = 'login'
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 admin = Admin(app, name='GameFinder', template_mode='bootstrap3')
 
@@ -27,4 +28,6 @@ admin.add_view(ModelView(Quiz, db.session))
 admin.add_view(ModelView(Feedbacks, db.session))
 admin.add_view(ModelView(Long_Answers, db.session))
 
-login.login_view = 'login'
+
+
+
