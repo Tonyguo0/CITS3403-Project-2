@@ -33,8 +33,8 @@
                 {%for answer in long_responses%}
                     <div class="long-response">
                         {% if answer.response %}
-                            <h3> for question:  <mark><b>{{answer.long_question.question_body}}</b></mark> </br>
-                                your response from the admin is: </br>
+                            <h3> <mark><b>{{answer.long_question.question_body}}</b></mark> </br>
+                                Marking comment: </br>
                                 <mark><b>{{answer.response}}</b></mark>
                             </h3>
                         {% endif %}
