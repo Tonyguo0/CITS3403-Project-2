@@ -40,7 +40,7 @@ class Question (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question_body = db.Column(db.Text, index=True)
     long_question = db.Column(db.Boolean, default = False)
-    mark_for_question = db.Column(db.Integer, index = True)
+    mark_for_question = db.Column(db.Integer, index = True, default = "1")
     options = db.relationship('Option', backref='question', lazy='dynamic')
     long_answer = db.relationship('Long_Answers', backref='long_question', lazy='dynamic')
 
