@@ -158,10 +158,10 @@ def account():
      # calculate the above variables below for each long answer question
     for question in long_questions:
         # if no long answer entry can be found for the current user then skip the loop
-        if not bool(current_user.long_answer.first()):
+        if not bool(current_user.long_answer.filter_by(question_id = question.id).first()):
             quizincompleteflag = True
             break
-        if bool(current_user.long_answer.filter_by(question_id = question.id).first().mark != None):
+        if not bool(current_user.long_answer.filter_by(question_id = question.id).first().mark != None):
             markflag = True
             mark += current_user.long_answer.filter_by(question_id = question.id).first().mark
             question_mark += question.mark_for_question
